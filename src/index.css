@@ -1,0 +1,175 @@
+:root {
+  /* ── Brand ── */
+  --color-primary:        #440099;   /* DST Purple — primary CTAs, nav active */
+  --color-primary-light:  #9063CD;   /* DST Primary Light — hover, secondary interactions */
+  --color-primary-pale:   #DBE2E9;   /* Accent light — tinted backgrounds */
+  --color-secondary:      #84BD00;   /* DST Lime — success, highlights, secondary CTA */
+  --color-secondary-light:#B2D007;   /* Lime (lighter) — hover state on lime elements */
+  --color-turquoise:      #326295;   /* Customise Turquoise — links, informational */
+
+  /* ── Text ── */
+  --color-text-1:         #101820;   /* Main text (very dark navy) */
+  --color-text-2:         #6B6C6F;   /* Secondary text */
+  --color-text-3:         #9E9FA5;   /* Placeholder */
+  --color-text-4:         #BBBBBB;   /* Tertiary / disabled */
+  --color-text-inverse:   #FFFFFF;   /* Text on dark backgrounds */
+
+  /* ── Surfaces ── */
+  --color-surface:        #FFFFFF;
+  --color-surface-2:      #FEFEFE;
+  --color-bg:             #EAECF3;   /* Page background */
+  --color-bg-alt:         #F5F5F5;
+
+  /* ── Semantic / Status ── */
+  --color-success:        #84BD00;   /* Success status */
+  --color-pending:        #F29339;   /* Pending / warning status */
+  --color-error:          #CB1520;   /* Failed / error */
+  --color-info:           #9063CD;
+
+  /* ── Borders & Dividers ── */
+  --color-border:         #DBE2E9;
+  --color-border-subtle:  #DEE4EF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #EAECF3;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #282829;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 100vh;
+}
+
+input, textarea, button, select {
+  font-family: inherit;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #440099 !important;
+  box-shadow: 0 0 0 3px rgba(68, 0, 153, 0.1) !important;
+}
+
+button:active {
+  opacity: 0.82;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.screen {
+  animation: slideUp 0.28s cubic-bezier(.22, .68, 0, 1.2) both;
+}
+
+.pop {
+  animation: popIn 0.4s cubic-bezier(.22, .68, 0, 1.4) both;
+}
+
+/* Split layout for Sign-in */
+.signin-split {
+  display: flex;
+  min-height: 100vh;
+}
+
+.signin-left {
+  width: 420px;
+  min-width: 420px;
+  background: linear-gradient(160deg, #440099 0%, #1a0066 100%);
+  padding: 28px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.signin-right {
+  flex: 1;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 48px;
+}
+
+.signin-right-inner {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Mobile responsive for signin */
+@media (max-width: 768px) {
+  .signin-split {
+    flex-direction: column;
+  }
+  .signin-left {
+    width: 100%;
+    min-width: 0;
+    padding: 20px 20px 28px;
+  }
+  .signin-right {
+    padding: 24px 20px 40px;
+  }
+  .signin-right-inner {
+    max-width: 100%;
+  }
+  .signin-steps {
+    display: none;
+  }
+}
+
+/* Mobile-centered wrapper for game screens */
+.game-screen-wrap {
+  display: flex;
+  justify-content: center;
+  background: #EAECF3;
+  min-height: 100vh;
+}
+
+.game-screen-inner {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #DEE4EF;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9063CD;
+}

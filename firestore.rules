@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidIcon(data) {
+      return data.keys().hasAll(['id', 'timestamp', 'age', 'gender', 'iconColor', 'iconSymbols', 'iconLabel', 'iconMode', 'desc1', 'desc3'])
+        && data.keys().hasOnly(['id', 'timestamp', 'age', 'gender', 'iconColor', 'iconSymbols', 'iconLabel', 'iconMode', 'desc1', 'desc3', 'iconDrawing', 'accountingExp'])
+        && data.id is string && data.id.size() <= 128
+        && data.timestamp is string && data.timestamp.size() <= 64
+        && data.age is string && data.age.size() <= 4
+        && data.gender in ['Male', 'Female']
+        && data.iconColor is string && data.iconColor.size() <= 16
+        && data.iconSymbols is list && data.iconSymbols.size() <= 4
+        && data.iconLabel is string && data.iconLabel.size() <= 20
+        && data.iconMode in ['symbol', 'draw']
+        && (!('iconDrawing' in data) || data.iconDrawing == null || (data.iconDrawing is string && data.iconDrawing.size() <= 500000))
+        && data.desc1 is string && data.desc1.size() <= 100
+        && data.desc3 is string && data.desc3.size() <= 100;
+    }
+
+    match /icons/{iconId} {
+      allow read: if true;
+      allow create: if isValidId(iconId) && isValidIcon(request.resource.data);
+      allow update, delete: if false;
+    }
+  }
+}

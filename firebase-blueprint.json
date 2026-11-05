@@ -1,0 +1,84 @@
+{
+  "entities": {
+    "IconEntry": {
+      "title": "IconEntry",
+      "description": "A participant icon design submission from the DST workshop",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Creation timestamp ISO string"
+        },
+        "age": {
+          "type": "string",
+          "description": "Participant age"
+        },
+        "gender": {
+          "type": "string",
+          "enum": ["Male", "Female"],
+          "description": "Participant gender"
+        },
+        "accountingExp": {
+          "type": "boolean",
+          "description": "Accounting or finance background"
+        },
+        "iconColor": {
+          "type": "string",
+          "description": "Background color hex code"
+        },
+        "iconSymbols": {
+          "type": "array",
+          "description": "Selected symbols array"
+        },
+        "iconLabel": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "Name of the icon"
+        },
+        "iconMode": {
+          "type": "string",
+          "enum": ["symbol", "draw"],
+          "description": "Design mode"
+        },
+        "iconDrawing": {
+          "type": "string",
+          "description": "Drawing data URL if hand-drawn"
+        },
+        "desc1": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "What the icon does"
+        },
+        "desc3": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "How it helps MyDST users"
+        }
+      },
+      "required": [
+        "id",
+        "timestamp",
+        "age",
+        "gender",
+        "iconColor",
+        "iconSymbols",
+        "iconLabel",
+        "iconMode",
+        "desc1",
+        "desc3"
+      ]
+    }
+  },
+  "firestore": {
+    "/icons/{iconId}": {
+      "schema": {
+        "$ref": "#/entities/IconEntry"
+      },
+      "description": "Public gallery of designed DST icons"
+    }
+  }
+}
